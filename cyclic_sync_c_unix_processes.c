@@ -2,13 +2,7 @@
  * Remi Andruccioli
  * February 2019
  *
- * This is a thought on the interview question dealt by Vorbrodt in this blog
- * post:
- * http://blog.vorbrodt.me/?p=584
- *
- * I like the implementation offered in this blog post.
- * Therefore I decided to post an implementation with 2 processes instead of 2
- * threads.
+ * Here is an implementation with 2 Unix processes instead of 2 threads.
  * The difference is that 2 processes have distinct memory areas by default.
  * So as one of the many possible implementations, I use Unix pipes as a way of
  * signaling events.
@@ -58,7 +52,7 @@ main()
   } else {
     /* Parent process: B */
     write(pipeA[1], &c, 1);
-        
+
     for (i = 0; i < MAXLOOP; ++i) {
       read(pipeB[0], &c, 1);
       fprintf(stderr, "%ld B\n", (long)getpid());
@@ -68,3 +62,4 @@ main()
 
   return EXIT_SUCCESS;
 }
+
